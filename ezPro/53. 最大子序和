@@ -1,0 +1,36 @@
+给定一个整数数组 nums ，找到一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
+
+
+int maxSubArray(vector<int>& nums) {
+        int maxsum = INT_MIN, sum=0;
+        if(nums.size()==1)return nums[0];
+        for(int i = 0;i<nums.size();i++){
+            sum+=nums[i];
+            if(sum>maxsum){
+                maxsum=sum;
+            }
+            if(sum<0){
+                sum=0;
+            } 
+        }
+        return maxsum;
+    }
+
+
+int maxSubArray(vector<int>& nums) 
+{
+    if(!nums.size())
+        return INT32_MIN;
+    int res,tmp;
+    tmp=res=nums[0];
+
+    for(int i=0;i<nums.size();++i)
+    {
+        tmp+=nums[i];
+        res=max(tmp,res);//函数调用比if慢
+        if(tmp<0)//前最
+            tmp=0;
+    }
+
+    return res;
+}

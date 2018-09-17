@@ -1,0 +1,22 @@
+给定一个二进制数组, 找到含有相同数量的 0 和 1 的最长连续子数组。
+
+
+
+
+//原理是使用两个相等的sum值标记中间的一段连续数组中的0\1个数相等，比如[0,1,0,1,1]
+//在index=0时，sum=-1；在index=2时，sum=-1，标明[0,2)之间的0\1个数相等
+int findMaxLength(vector<int>& nums) 
+{
+    unordered_map<int,int> m;
+    int sum=0,res=0;
+    m[0]=-1;//当遍历数组过程中出现0时候，之前不会出现0对应的位置，因此需要提前插入0->-1，对应完整的长度
+    for(int i=0;i<nums.size();++i)
+    {
+        sum+=(nums[i]==0?-1:1);
+        if(m.find(sum)==m.end())
+            m[sum]=i;   
+        else
+            res=max(res,i-m[sum]);
+    }
+    return res;
+}

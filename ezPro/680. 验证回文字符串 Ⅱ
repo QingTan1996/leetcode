@@ -1,0 +1,52 @@
+给定一个非空字符串 s，最多删除一个字符。判断是否能成为回文字符串。
+
+
+bool isValid(string &s,int &i,int &j)
+{
+    while(i<=j)
+    {
+        if(s[i]!=s[j])
+            return false;
+        ++i;
+        --j;
+    }
+    return true;
+}
+bool validPalindrome(string s) 
+{
+    if(s.empty())   return false;
+    
+    int i=0,j=s.size()-1;
+
+    if(isValid(s,i,j))
+        return true;
+    
+    int i_t=i,j_t=j;
+
+    return isValid(s,++i,j)||isValid(s,i_t,--j_t);//不对就进入自循环判断一次，为什么会想到用递归这种麻烦的一笔的方法
+}
+
+
+//内存超限，当s没有使用引用时
+bool recursive(string &s,int i,int j,bool &flag)//flag标明以删除了一个元素
+{
+    if(i>j)    return true;//i<j时，也就是终止条件，该返回true
+    else if(s[i]==s[j]) return recursive(s,i+1,j-1,flag);
+    else
+    {
+        if(flag)
+            return false;
+        else
+        {
+            flag=true;
+            return recursive(s,i+1,j,flag)||recursive(s,i,j-1,flag);
+        }    
+    }
+}
+bool validPalindrome(string s) 
+{
+    if(s.empty())   return false;
+    bool flag=false;
+    int i=0,j=s.size()-1;
+    return recursive(s,i,j,flag);
+}

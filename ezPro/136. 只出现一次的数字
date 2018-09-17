@@ -1,0 +1,37 @@
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
+
+
+int singleNumber(vector<int>& nums) 
+{
+    int res=0;
+    for(auto i:nums)
+        res^=i;
+    return res;
+}
+
+int singleNumber(vector<int>& nums) 
+{
+    int res=0;
+    sort(nums.begin(),nums.end());
+    for(int i=0;i<nums.size();i+=2)
+    {
+        if(nums[i]!=nums[i+1])
+        {
+            res=nums[i];
+            break;
+        }
+    }
+    return res;
+}
+
+int singleNumber(vector<int>& nums) 
+{
+    int res=INT_MIN;
+    unordered_map<int,int> um;
+    for(auto i:nums)
+        ++um[i];
+    for(auto i:um)
+        if(i.second==1)
+            res=i.first;
+    return res;
+}

@@ -1,0 +1,22 @@
+给定一个正整数，检查他是否为交替位二进制数：换句话说，就是他的二进制数相邻的两个位数永不相等。
+
+//说简单也简单，说难也难
+bool hasAlternatingBits(int n) 
+{
+    int a=(n^(n>>1))+1;
+    return !(a&(a-1));
+}
+
+//还是笨方法有意思
+bool hasAlternatingBits(int n) 
+{
+    while(n)
+    {
+        //注意位运算& ^ | && || 优先级低于==、!=
+        if(!((n&0x1)^((n>>1)&0x1)))
+            return false;
+        n>>=1;
+    }
+    return true;
+}
+

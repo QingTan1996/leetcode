@@ -1,0 +1,31 @@
+给定一个链表，判断链表中是否有环。
+
+//双指针
+bool hasCycle(ListNode *head) 
+{
+    ListNode *p=head;
+    ListNode *q=head?head->next:NULL;
+    while(q)
+    {
+        p=p->next;
+        q=q->next;
+        q=q?q:q->next;
+        if(p==q)
+            return true;
+    }
+    return false;
+}
+
+//map 结点地址主键
+bool hasCycle(ListNode *head) 
+{
+    map<ListNode *,int> node;
+    while(head)
+    {
+        ++node[head];
+        if(node[head]>1)
+            return true;
+        head=head->next;
+    }
+    return false;
+}

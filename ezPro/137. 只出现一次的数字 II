@@ -1,0 +1,51 @@
+给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现了三次。找出那个只出现了一次的元素。
+说明：
+你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？
+
+
+//最巧的
+int singleNumber(vector<int>& nums) 
+{
+    int ones = 0, twos = 0;
+    for(int i = 0; i < nums.size(); i++)
+    {
+        ones = (ones ^ nums[i]) & ~twos;
+        twos = (twos ^ nums[i]) & ~ones;
+    }
+    return ones;
+}
+
+//带了些须解释
+int singleNumber(vector<int>& nums) {
+        int count;
+        int mask;
+        int result = 0;
+        for (int i=0; i<32; i++) //分别取int32位上的所有位然后进行统计
+        {
+            count = 0;
+            mask = 1 << i;
+            for (int j=0; j<nums.size(); j++)
+            {
+                if (mask & nums[j])  //取第i位，如果i位上是1则count++
+                    count ++;
+            }
+            if (count % 3) //如果统计1的个数不为3的倍数，说明唯一的数字这个位上是1
+                result |= mask;  //写进结果
+        }
+        return result;
+    }
+
+//只是巧了一些
+int singleNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        
+        int i = 0;
+        for(; i < nums.size() - 2; i += 3) {
+            //因为其他每个数字都出现三次，因此单独出现的数字肯定排在每三个一组的第一个
+            if(nums[i] != nums[i + 1]) {
+                return nums[i];
+            }
+        }
+        
+        return nums[i]; //如果单独出现的数字位于最后一位
+    }

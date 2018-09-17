@@ -1,0 +1,19 @@
+例如：
+    string str="this is a very good day!"
+
+
+stringstream：
+    ``` 
+    string str="this is a good day!"
+    stringstream ss(str)//string->字符流
+    while(getline(ss,tmp," "))//分隔符可以设置为其他分隔符
+        cout<<tmp<<endl;
+    ```
+
+istringstream:
+    ```
+    string str="this is a good day!"
+    istringstream ss(s);
+    while(ss>>line)//分离空格分开的字符串
+        cout<<line<<endl;
+    ```

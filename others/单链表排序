@@ -1,0 +1,63 @@
+单链表排序相关：
+    1、单链表排序
+    2、单链表对半排序，前半部分升序，后半部分降序
+
+
+void swap(int *n1,int *n2)
+{
+    int tmp=*n1;
+    *n1=*n2;
+    *n2=tmp;
+}
+
+1、插入排序单链表
+void bubbleSort(Node *head)
+{
+    if(!head)   return;
+    Node *p,*q;
+    for(p=head;p->next;p=p->next)
+        for(q=p->next;q;q=q->next)
+            if(p->val>q->val)
+                swap(p->val,q->val);
+}
+
+
+2、单链表操作，分两部分排序(插入排序)
+
+void sortList(Node *pHead)
+{
+    if(!pHead)
+        return;
+    Node *p=pHead,*q=NULL;
+    int len=0,i,j;
+    while(p)
+    {
+        ++len;
+        p=p->next;
+    }
+    p=pHead;
+    for(i=0;i<len/2;++i)
+    {
+        q=p->next;
+        for(j=i+1;j<len/2;++j)
+        {
+            if(p->val>q->val)
+                swap(p->val,q->val);
+            q=q->next;
+        }
+        p=p->next;
+    }
+    if(len%2)   
+        p=p->next;
+    for(i=0;i<len/2-1;++i)
+    {
+        q=p->next;
+        for(j=i+1;j<len/2;++j)
+        {
+            if(p->val<q->val)
+                swap(p->val,q->val);
+            q=q->next;
+        }
+        p=p->next;   
+    }
+}

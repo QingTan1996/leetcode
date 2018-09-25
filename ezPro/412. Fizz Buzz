@@ -1,0 +1,61 @@
+写一个程序，输出从 1 到 n 数字的字符串表示。
+1. 如果 n 是3的倍数，输出“Fizz”；
+2. 如果 n 是5的倍数，输出“Buzz”；
+3.如果 n 同时是3和5的倍数，输出 “FizzBuzz”。
+
+
+//性能优化了一些，但是写法不好看
+vector<string> fizzBuzz(int n) 
+{
+    vector<string> res;
+    if(n<1) return res;
+    int Fizz=0,Buzz=0;
+    for(int i=1;i<=n;++i)
+    {
+        ++Fizz;
+        ++Buzz;
+        if(Fizz==3&&Buzz==5)
+        {
+            res.push_back("FizzBuzz");
+            Fizz=Buzz=0;
+        }    
+        else if(Fizz==3)
+        {
+            res.push_back("Fizz");
+            Fizz=0;
+        }    
+        else if(Buzz==5)
+        {
+            res.push_back("Buzz");
+            Buzz=0;
+        }    
+        else
+            res.push_back(to_string(i));
+    }
+    return res;
+}
+
+
+//非常普通的解法
+bool isNumber(int num,int key)
+{
+    return num%key==0;
+}
+
+vector<string> fizzBuzz(int n) 
+{
+    vector<string> res;
+    if(n<1) return res;
+    for(int i=1;i<=n;++i)
+    {
+        if(isNumber(i,3)&&isNumber(i,5))
+            res.push_back("FizzBuzz");
+        else if(isNumber(i,3))
+            res.push_back("Fizz");
+        else if(isNumber(i,5))
+            res.push_back("Buzz");
+        else
+            res.push_back(to_string(i));
+    }
+    return res;
+}

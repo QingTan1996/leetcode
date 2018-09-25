@@ -7,25 +7,30 @@
 #include<climits>
 using namespace std;
 
-bool isNStraightHand(vector<int>& hand, int W) 
+void moveZeroes(vector<int>& nums) 
 {
-    if(hand.empty()||(hand.size()%W))    return false;
-    unordered_map<int,int> um;
-    for(auto i:hand)    ++um[i];
-    for(int i=0;i<um.size()/W;++i)
+    if(nums.empty())    return;
+    int count=0;
+    for(auto i=nums.begin();i!=nums.end();)
     {
-        vector<int> tmp(W,0);
-        for(auto j:um)
+        if(*i==0)
         {
-            tmp.push_back(j.first);
-            if(j.second==1)
-                um.erase()
-        }
+            nums.erase(i);
+            ++count;
+        }    
+        else
+            ++i;
     }
-    return true;
+    for(int i=0;i<count;++i)
+        nums.push_back(0);
 }
 
 int main()
 {
+    vector<int> nums={0,1,0,3,12};
+    moveZeroes(nums);
+    for(auto i:nums)
+        cout<<i<<" ";
+    cout<<endl;
     return 0;
 }

@@ -7,23 +7,18 @@
 #include<climits>
 using namespace std;
 
-void moveZeroes(vector<int>& nums) 
+int removeDuplicates(vector<int>& nums) 
 {
-    if(nums.empty())    return;
-    int index=0;
-    for(int i=0;i<nums.size();++i)
-        if(nums[i]!=0)
-            nums[index++]=nums[i];
-    for(int i=index;i<nums.size();++i)
-        nums[i]=0;
+       
 }
 
 int main()
 {
-    vector<int> nums={};
-    moveZeroes(nums);
-    for(auto i:nums)
-        cout<<i<<" ";
+
+    vector<int> nums={0,0,1,1,1,2,2,3,3,4};
+    int res=removeDuplicates(nums);
+    for(int i=0;i<res;++i)
+        cout<<nums[i]<<" ";
     cout<<endl;
     return 0;
 }

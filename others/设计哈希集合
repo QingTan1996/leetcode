@@ -1,0 +1,64 @@
+不使用任何内建的哈希表库设计一个哈希集合
+具体地说，你的设计应该包含以下的功能
+
+add(value)：向哈希集合中插入一个值。
+contains(value) ：返回哈希集合中是否存在这个值。
+remove(value)：将给定值从哈希集合中删除。如果哈希集合中没有这个值，什么也不做。
+
+
+class MyHashSet {
+public:
+    int *hash_map;
+public:
+    /** Initialize your data structure here. */
+    MyHashSet() {
+        hash_map=new int(sizeof(int)*10000);
+        for(int i=0;i<10000;++i)
+            hash_map[i]=INT_MIN;
+    }
+    
+    void add(int key) {
+        int index=(key%10007)%10000;//确保算出的key不超过数组长度
+        int tmp=index;
+        bool flag=true;
+        while(hash_map[tmp]!=key&&flag)
+        {
+            if(hash_map[tmp]==INT_MIN)
+            {
+                hash_map[tmp]=key;
+                break;
+            }
+            tmp=(tmp+1)%10000;
+            if(tmp==index)
+                flag=false;
+        }
+    }
+    
+    void remove(int key) {
+        int index=(key%10007)%10000;
+        int tmp=index;
+        bool flag=true;
+        while(hash_map[tmp]!=key&&flag)
+        {
+            tmp=(tmp+1)%10000;
+            if(index==tmp)
+                flag=false;
+        }
+        if(flag)
+            hash_map[tmp]=INT_MIN;
+    }
+    
+    /** Returns true if this set did not already contain the specified element */
+    bool contains(int key) {
+        int index=(key%10007)%10000;
+        int tmp=index;
+        bool flag=true;
+        while(hash_map[tmp]!=key&&flag)
+        {
+            tmp=(tmp+1)%10000;
+            if(tmp==index)
+                flag=false;
+        }
+        return flag;
+    }
+};

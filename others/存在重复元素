@@ -1,11 +1,5 @@
-#include<iostream>
-#include<sstream>
-#include<vector>
-#include<unordered_map>
-#include<string>
-#include<unordered_set>
-#include<climits>
-using namespace std;
+给定一个整数数组，判断是否存在重复元素。
+如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。
 
 bool containsDuplicate(vector<int>& nums)
 {
@@ -17,9 +11,4 @@ bool containsDuplicate(vector<int>& nums)
         ownSet.insert(i);
     } 
     return true;
-}
-
-int main()
-{
-    return 0;
 }

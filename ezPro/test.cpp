@@ -1,22 +1,28 @@
 #include<iostream>
-#include<sstream>
+#include<algorithm>
 #include<vector>
 #include<unordered_map>
 #include<string>
 #include<unordered_set>
-#include<climits>
+#include<cmath>
 using namespace std;
 
-bool containsDuplicate(vector<int>& nums)
+bool isHappy(int n) 
 {
     unordered_set<int> ownSet;
-    for(auto i:nums)
+    do
     {
-        if(ownSet.find(i)!=ownSet.end())
-            return false;
-        ownSet.insert(i);
-    } 
-    return true;
+        int tmp=0;
+        while(n)
+        {
+            tmp+=pow((n%10),2);
+            n/=10;
+        }
+        if(tmp==1)
+            return true;
+        ownSet.insert(tmp);
+    }while(ownSet.find(n)!=ownSet.end()); 
+    return false;
 }
 
 int main()

@@ -1,0 +1,27 @@
+给定两个数组，编写一个函数来计算它们的交集。
+
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
+{
+    vector<int> ret;
+    unordered_set<int> ownSet;
+    for(auto i:nums1)
+        ownSet.insert(i);  
+    for(auto i:ownSet)//set里的数据是独一的
+        if(find(nums2.begin(),nums2.end(),i)!=nums2.end())
+            ret.push_back(i);
+    return ret;      
+}
+
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
+{
+    vector<int> ret;
+    unordered_set<int> ownSet,tmp;
+    for(auto i:nums1)
+        ownSet.insert(i);  
+    for(auto i:nums2)
+        if(ownSet.find(i)!=ownSet.end())
+            tmp.insert(i);
+    for(auto i:tmp)
+        ret.push_back(i);
+    return ret;      
+}
